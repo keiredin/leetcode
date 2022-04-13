@@ -6,7 +6,8 @@ class Solution:
     def recursive(self,num):
         if num == 1:
             return "0"
-        return self.recursive(num-1) + "1" + self.reverse(self.invert(self.recursive(num-1)))
+        ans = self.recursive(num-1)
+        return ans + "1" + self.reverse(self.invert(ans))
           
     def reverse(self,s):
         return s[::-1]
