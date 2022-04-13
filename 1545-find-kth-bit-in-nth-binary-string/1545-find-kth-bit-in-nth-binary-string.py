@@ -1,13 +1,16 @@
 class Solution:
     def findKthBit(self, n: int, k: int) -> str:
-        answ = self.recursive(n)
+        answ = self.recursive(n,k)
         return answ[k-1]
     
-    def recursive(self,num):
+    def recursive(self,num,k):
         if num == 1:
             return "0"
-        ans = self.recursive(num-1)
-        return ans + "1" + self.reverse(self.invert(ans))
+        curr = self.recursive(num-1,k)
+        res =  curr + "1" + self.reverse(self.invert(curr))
+        if len(res) >= k:
+            return res
+        return res
           
     def reverse(self,s):
         return s[::-1]
