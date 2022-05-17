@@ -1,15 +1,28 @@
 class Solution:
     def findMinDifference(self, timePoints: List[str]) -> int:
-        times = [
-            (int(time.split(":")[0])*60 + int(time.split(":")[1]))
-            for time in timePoints]
+        lst = []
+        for ele in timePoints:
+            lst.append((int(ele[:2])*60) + int(ele[3:]))
+        lst.sort()
+        r = lst[1]-lst[0]
+        for i in range(1,len(lst)):
+            r = min(r,lst[i]-lst[i-1])
+
+        return min(r,1440-(lst[-1]-lst[0]))
+
+
+# class Solution:
+#     def findMinDifference(self, timePoints: List[str]) -> int:
+#         times = [
+#             (int(time.split(":")[0])*60 + int(time.split(":")[1]))
+#             for time in timePoints]
         
-        times = sorted(times)
-        for t in times.copy():
-            if t < 12*60:
-                times.append(t + 24*60)
+#         times = sorted(times)
+#         for t in times.copy():
+#             if t < 12*60:
+#                 times.append(t + 24*60)
                 
-        return min([(t2-t1) for t1, t2 in zip(times[:-1], times[1:])])
+#         return min([(t2-t1) for t1, t2 in zip(times[:-1], times[1:])])
 
 
 
