@@ -19,5 +19,3 @@ class Solution:
                 max_length = max(max_length, right-left+1)
 
         return n - max_length if max_length != -1 else -1
-                    
-        
