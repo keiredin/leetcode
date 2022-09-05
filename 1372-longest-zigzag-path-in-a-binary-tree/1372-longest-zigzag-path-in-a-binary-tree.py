@@ -14,4 +14,4 @@ class Solution:
             else:
                 return max(maxZigZag(node.left, 'left', maxx+1), maxZigZag(node.right, 'left', 0))
             
-        return max(maxZigZag(root,'left',0),maxZigZag(root,'right',0) ,)
+        return max(maxZigZag(root,'left',0),maxZigZag(root,'right',0))
