@@ -15,7 +15,6 @@ class Solution:
             if sRight[s[i-1]] > 1:
                 sRight[s[i-1]] -= 1
             else:
-                del sRight[s[i-1]]
                 lenSright -= 1
                 
             if lenSleft == lenSright:
