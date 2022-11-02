@@ -7,7 +7,6 @@ class Solution:
             return -1
         while queue:
             node,steps = queue.popleft()
-            print(node)
             
             if node == target:
                 return steps
