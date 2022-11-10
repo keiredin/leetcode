@@ -7,8 +7,8 @@ class Solution:
                 remainder = 1
             else:
                 digits[i] += 1
-                remainder = 0
-                break
-        return digits if not remainder else [1] + digits
+                return digits
+            
+        return [1] + digits
                 
         
