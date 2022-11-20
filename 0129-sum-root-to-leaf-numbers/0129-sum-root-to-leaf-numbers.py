@@ -6,6 +6,28 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        #bfs
+        queue = deque([(root,0)])
+        
+        res = 0
+        while queue:
+            curNode,pathSum = queue.popleft()
+            
+            pathSum = pathSum * 10 + curNode.val
+            
+            if not curNode.left and not curNode.right:
+                res += pathSum
+            
+            if curNode.left:
+                queue.append((curNode.left, pathSum))
+            
+            if curNode.right:
+                queue.append((curNode.right, pathSum))
+        
+        return res
+            
+            
+            
         return self.findRootToLeafPathNumbers(root,0)
         
     def findRootToLeafPathNumbers(self,node, pathSum):
