@@ -3,7 +3,27 @@ class Solution:
         if len(nums) <= 4:
             return 0
         
-        nums.sort()
+        minHeap, maxHeap = [], []
+        
+        for num in nums:
+            heappush(minHeap, num)
+            heappush(maxHeap, -num)
+            
+            if len(maxHeap) > 4:
+                heappop(maxHeap)
+                
+            if len(minHeap) > 4:
+                heappop(minHeap)
+        res = inf
+        
+        maxHeap = sorted([num * -1 for num in maxHeap])
+        i = 0
+        while minHeap:
+            res = min(res, heappop(minHeap) - maxHeap[i])
+            i += 1
+        return res
+        
+#         nums.sort()
         # there are three possibilities
         
         #possibility 1 - remove the first 3
