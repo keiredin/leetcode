@@ -1,6 +1,6 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        countS = defaultdict(int)
+        countS = Counter()
         countP = Counter(p)
         lenP = len(p)
         
@@ -12,21 +12,16 @@ class Solution:
             
         answ = []
         l = 0
-        for r in range(lenP, len(s)):
-            if countS == countP:
-                answ.append(l)
-            
-            if countS[s[l]] > 1:
-                countS[s[l]] -= 1
-            else:
-                del countS[s[l]]
-                
-            countS[s[r]] += 1
-            l += 1
-            r += 1
-            
         if countS == countP:
             answ.append(l)
+
+        for r in range(lenP, len(s)):            
+            countS -= {s[l]:1}                
+            countS[s[r]] += 1
+            l += 1
+
+            if countS == countP:
+                answ.append(l)
             
         return answ
         
