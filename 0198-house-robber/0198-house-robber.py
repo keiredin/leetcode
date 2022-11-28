@@ -1,17 +1,34 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        dp = [0] * len(nums)
-        dp[0] = nums[0]
         
+        # space optimization
+        prev = nums[0]
+        prev2 = 0
+
         for i in range(1, len(nums)):
-            rob = nums[i]
+            take = nums[i]
             if i > 1:
-                rob += dp[i-2]
+                take += prev2
+
+            noTake = 0 + prev
+            cur = max(take, noTake)
+            prev2 = prev
+            prev = cur
+
+        return prev
+    
+#         dp = [0] * len(nums)
+#         dp[0] = nums[0]
+        
+#         for i in range(1, len(nums)):
+#             rob = nums[i]
+#             if i > 1:
+#                 rob += dp[i-2]
                 
-            notRob = dp[i-1]
-            dp[i] = max(rob, notRob)
+#             notRob = dp[i-1]
+#             dp[i] = max(rob, notRob)
             
-        return dp[len(nums)-1]
+#         return dp[len(nums)-1]
      
 #         memo = {}
 #         def dp(idx):
