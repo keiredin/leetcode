@@ -1,20 +1,36 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
         
-        memo = {}
-        def dfs(i):
-            if i in memo:
-                return memo[i]
-            if i >= len(nums):
-                return 0
+        for i in range(1, len(nums)):
+            rob = nums[i]
+            if i > 1:
+                rob += dp[i-2]
+                
+            notRob = dp[i-1]
+            dp[i] = max(rob, notRob)
             
-            memo[i] = nums[i] + max(dfs(i+2), dfs(i+3))
-            return memo[i]
-        
-        return max(dfs(0),dfs(1))
-        
-        
-        
+        return dp[len(nums)-1]
+     
+#         memo = {}
+#         def dp(idx):
+#             if idx in memo:
+#                 return memo[idx]
+#             if idx == 0:
+#                 return nums[idx]
+#             if idx < 0:
+#                 return 0
+            
+#             pick = nums[idx] + dp(idx-2)
+#             notPick = dp(idx-1)
+
+#             memo[idx] = max(pick,notPick)
+#             return memo[idx]
+
+
+#         return dp(len(nums) - 1)
+
         
         
         
