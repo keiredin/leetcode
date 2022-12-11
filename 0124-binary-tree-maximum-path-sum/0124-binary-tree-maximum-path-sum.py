@@ -22,6 +22,7 @@ class Solution:
             curMax = max(left + node.val, right+node.val )
             
             return curMax
+        
         dfs(root)
         return maxx
     
