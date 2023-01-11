@@ -14,6 +14,8 @@ class Solution:
                 if nei not in visited:
                     visited.add(nei)
                     answ.append(dfs(nei))
+                    
+            # if all neighbors are visited - that means its a leaf node        
             if not answ:
                 return hasApple[node]
             
