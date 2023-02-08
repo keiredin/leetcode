@@ -1,7 +1,9 @@
 class Solution:
     def numBusesToDestination(self, routes: List[List[int]], source: int, target: int) -> int:
         
-        if source == target: return 0          
+        if source == target:
+            return 0  
+        
         n = len(routes)
         rmap = [[0] * n for _ in range(n)]      
         start, end = set(), set()  
@@ -22,15 +24,15 @@ class Solution:
                     rmap[i][j] = rmap[j][i] = 1 
 
         q = deque([s for s in start])         
-        visit = Counter(start)                  
+        visited = Counter(start)                  
         while q:
             cur = q.popleft()
-            cnt = visit[cur]
+            cnt = visited[cur]
             if cur in end:                      
                 return cnt
             for i in range(n):                  
-                if rmap[cur][i] and i not in visit:
+                if rmap[cur][i] and i not in visited:
                     q.append(i)
-                    visit[i] = cnt + 1          
+                    visited[i] = cnt + 1          
         return -1 
 
