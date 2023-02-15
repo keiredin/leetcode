@@ -40,11 +40,11 @@ class PeekingIterator:
         """
         :rtype: int
         """
-        temp = self.nextt
+        res = self.nextt
         self.nextt = None
         if self.iterator.hasNext():
             self.nextt = self.iterator.next()
-        return temp
+        return res
 
     def hasNext(self):
         """
