@@ -8,8 +8,8 @@ class Solution:
             return "Neither"
         
         
-    def isIPv4(self,query):
-        temp = query.split(".")
+    def isIPv4(self,IP):
+        temp = IP.split(".")
         if len(temp) > 4:
             return False
         
