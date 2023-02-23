@@ -8,11 +8,8 @@ class Solution:
         for i in range(len(expression)):
             # split input at each operator
             if expression[i] in "+-*":
-                left_half = expression[:i]
-                right_half = expression[i+1:]
-                
-                left_results = self.diffWaysToCompute(left_half)
-                right_results = self.diffWaysToCompute(right_half)
+                left_results = self.diffWaysToCompute(expression[:i])
+                right_results = self.diffWaysToCompute(expression[i+1:])
                 
                 for x in left_results:
                     for y in right_results:
