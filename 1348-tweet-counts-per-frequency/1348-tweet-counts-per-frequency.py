@@ -2,7 +2,6 @@ class TweetCounts:
 
     def __init__(self):
         self.tweets = defaultdict(list)
-        self.time = { 'minute': 60, 'hour':60*60, 'day':60*60*24}
 
     def recordTweet(self, tweetName: str, time: int) -> None:
         self.tweets[tweetName].append(time)
