@@ -49,23 +49,3 @@ class NestedIterator:
 # while i.hasNext(): v.append(i.next())
 
 
-
-# class NestedIterator:
-#     def __init__(self, nestedList: [NestedInteger]):
-        
-#         def flatten(nested_list):
-#             res = []
-#             for e in nested_list:
-#                 if e.isInteger():
-#                     res.append(e.getInteger())
-#                 else:
-#                     res.extend(flatten(e.getList()))
-#             return res
-        
-#         self.flat_list = flatten(nestedList)
-        
-#     def next(self) -> int:
-#         return self.flat_list.pop(0)
-    
-#     def hasNext(self) -> bool:
-#          return len(self.flat_list)>0
