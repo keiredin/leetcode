@@ -31,6 +31,7 @@ class Codec:
                 dfs(node.right)
                 answ.append(')')
         dfs(root)
+        print(answ)
         return "".join(answ)
                 
         
