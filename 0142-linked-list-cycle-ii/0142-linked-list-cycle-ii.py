@@ -3,17 +3,21 @@
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
-
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        sett = set()
+        slow = fast = head
+        while fast:
+            fast = fast.next and fast.next.next
+            slow = slow.next
+            if slow == fast:
+                break
+                
+        if fast is None:
+            return None
         
-        while head:
-            if head.next in sett:
-                return head.next
+        slow = head
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
             
-            sett.add(head)
-            head = head.next
-            
-        return None
-        
+        return slow
