@@ -1,14 +1,14 @@
 class Solution:
     def maxLength(self, arr: List[str]) -> int:
-        self.maximum = 0
-        def backtrack(start,array,s):
-            if len(s)==len(set(s)):
-                self.maximum = max(self.maximum,len(s))
-            else:
-                return
-            for i in range(start,len(array)):
-                backtrack(i+1,array,s + array[i])
+        res = 0
+        def backtrack(i,path):
+            nonlocal res
+            if len(set(path)) == len(path):
+                res = max(res, len(path))
                 
-        backtrack(0,arr,"")
-        return self.maximum
+            for j in range(i,len(arr)):
+                backtrack(j+1, path+arr[j])
+                
+        backtrack(0,"")
+        return res
         
