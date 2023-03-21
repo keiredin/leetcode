@@ -1,104 +1,23 @@
 # Definition for a binary tree node.
-# class TreeNode:
+# class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
-    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+class Solution(object):
+    def pathSum(self, root, targetSum):
+        hashmap = {0: 1}
         
-        def dfs(node, target, curPath):
-            
-            
-            if not node:
+        
+        def dfs(root, target_sum, current_sum, hashmap):
+            if not root:
                 return 0
-            
-            curPath.append(node.val)
-            pathCount, pathSum = 0, 0 
-            
-            for i in range(len(curPath)-1,-1,-1):
-                pathSum += curPath[i]
-                
-                if pathSum == target:
-                    pathCount += 1
-            
-            
-            
-            pathCount += dfs(node.left, target, curPath) # left = dfs(node.left, target, curPath) # or 
-            pathCount += dfs(node.right, target, curPath) # right = dfs(node.right, target, curPath) # or 
-            
-            curPath.pop()
-            
-            return pathCount # return pathCount + left + right
-
-                        
+            current_sum += root.val
+            count = hashmap.get(current_sum - target_sum, 0)
+            hashmap[current_sum] = hashmap.get(current_sum, 0) + 1
+            count += dfs(root.left, target_sum, current_sum, hashmap)
+            count += dfs(root.right, target_sum, current_sum, hashmap)
+            hashmap[current_sum] -= 1
+            return count
         
-        if root:
-            return dfs(root, targetSum,[])
-        else: return 0
-        
-        
-        
-        
-        
-        
-#         pathCount = 0
-        
-#         def dfs(node, target, curPath):
-#             nonlocal pathCount
-            
-#             if not node:
-#                 return 0
-            
-#             curPath.append(node.val)
-#             pathSum = 0
-            
-#             for i in range(len(curPath)-1,-1,-1):
-#                 pathSum += curPath[i]
-                
-#                 if pathSum == target:
-#                     pathCount += 1
-            
-            
-            
-#             left = dfs(node.left, target, curPath)
-#             right = dfs(node.right, target, curPath)
-            
-#             curPath.pop()
-
-                        
-        
-#         if root:
-#             dfs(root, targetSum,[])
-#         return pathCount
-    
-    
-#         stack = [root]
-#         self.count = 0
-#         self.targetSum = targetSum
-        
-#         # iterate over all the nodes
-#         while(stack):
-#             top = stack.pop()
-#             if top:
-#                 stack.insert(0, top.left)
-#                 stack.insert(0, top.right)
-            
-#             # traverse the tree using each node as root
-#             self.traverseTree(top, 0)
-
-#         return self.count
-
-#     def traverseTree(self, curr, summ):
-#         if not curr:
-#             return
-
-#         summ += curr.val
-#         if summ == self.targetSum:
-#             self.count += 1
-
-#         self.traverseTree(curr.left, summ)
-#         self.traverseTree(curr.right, summ)
-        
-        
-        
+        return dfs(root, targetSum, 0, hashmap)
