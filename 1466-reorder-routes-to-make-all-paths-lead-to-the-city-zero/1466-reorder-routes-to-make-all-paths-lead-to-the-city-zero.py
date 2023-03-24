@@ -16,9 +16,7 @@ class Solution:
             visited.add(node)
             for nei in graph[node]:
                 if nei not in visited:
-                    if (nei,node) not in original_dir:
-                        res += 1
-                        
+                    res += (nei,node) not in original_dir
                     dfs(nei)
                     
         dfs(0)
