@@ -1,18 +1,43 @@
 class Solution:
-    def minDays(self, A, m, k):
-        if m * k > len(A): return -1
-        left, right = 1, max(A)
-        while left < right:
-            mid = (left + right) / 2
-            flow = bouq = 0
-            for a in A:
-                flow = 0 if a > mid else flow + 1
-                if flow >= k:
-                    flow = 0
-                    bouq += 1
-                    if bouq == m: break
-            if bouq == m:
-                right = mid
+    def minDays(self, bloomDay, m, k):
+        if m * k > len(bloomDay): return -1
+        
+        def search(mid,k):
+            count = 0
+            flower = 0
+            i = 0
+
+            while i < len(bloomDay):
+                                
+                if bloomDay[i] <= mid:
+                    flower += 1
+                else:
+                    flower = 0
+
+                if flower >= k:
+                    flower = 0
+                    count += 1
+            
+                i += 1
+
+            return count
+    
+  
+
+        l = min(bloomDay)
+        r = max(bloomDay)
+
+
+        best = r
+        while l <= r:
+            mid = (l+r) // 2
+            if search(mid,k) < m:
+                l = mid + 1
             else:
-                left = mid + 1
-        return int(left)
+                best = mid
+                r = mid - 1
+
+        return best
+
+
+        
